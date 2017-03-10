@@ -27,7 +27,7 @@ class User():
     def get_score_distribution(self):
         return Counter([round(track['score'], 1) for track in self.tracks])
 
-    def  get_std(self):
+    def get_std(self):
         # On suppose que qqn de picky aura bcp de mauvaises et hautes notes
         return np.std([track['score'] for track in self.tracks])
 

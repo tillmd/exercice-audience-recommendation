@@ -43,13 +43,21 @@ Structure of the data : Array of array of tracks
 jupyter notebook
 ```
 
+- Run the tests
+
+```
+nosetests --rednose --force-color' tests
+```
+
 ### Exploration
 
-The exploratoring part can be seen using [exploratory.ipynb](https://github.com/tillmd/???/blob/master/exploratory.ipynb)
+The exploratoring part can be seen using [exploratory.ipynb](https://github.com/tillmd/exercice-audience-recommendation/blob/master/exploratory.ipynb)
 
 We examine the basics statistics of the database, some tops, the score distribution. We also compute the correlation between artists that we will use in our recommendation process.
 
 ### Recommendation
+
+Recommendation notebook [reco.ipynb](https://github.com/tillmd/exercice-audience-recommendation/blob/master/reco.ipynb)
 
 We want to recommend songs for an audience who have different tastes.
 The main strategy is :
@@ -100,3 +108,22 @@ We didn't use the `genre` field because of its unprecision :
     },
 ```
 
+#### Ranking
+
+The ranking will be :
+
+  - First: commons songs liked sorted by number of people knowing the song and then the mean score of the track
+  - Second: the correlated song with a score equal to the seed track score times the track mean score
+  - Third: the songs by the common artist with a mean score above a "min score"
+    + First for the artist known by everybody
+    + Second less shares artist
+    + Finally correlated artist songs still above a min score (in average)
+  - Finally the last songs sorted by the average score
+
+#### Future work
+
+ - Metrics on ranking
+   + Score evolution
+   + Users distribution
+ - Tests on engines
+ - Refactoring (ranking-engine)

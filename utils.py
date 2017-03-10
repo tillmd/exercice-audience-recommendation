@@ -15,11 +15,11 @@ def load_data():
     return d
 
 
-def get_cooccurrence(users, field='artist', min_score=0):
+def get_cooccurrence(users, field, min_score=0):
     d = defaultdict(int)
     for user in users:
         artists = sorted(
-            [track[field] for track in user.tracks if track['score'] > min_score])
+            [track[field] for track in user.tracks if track['score'] >= min_score])
         for pair in combinations(artists, 2):
             d[pair] += 1
     return d
