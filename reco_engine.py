@@ -22,6 +22,12 @@ class RecoEngine(object):
         self.tracks_db = self.tracks_db.reset_index()
         self.tracks_db = self.tracks_db.set_index("id")
 
+        self.artists_db = self.tracks_db.groupby(
+            ['artist']).mean()
+        self.db = dict()
+        self.db['id'] = self.tracks_db
+        self.db['artist'] = self.artists_db
+
     def get_cooccurences(self, min_score, field):
         tracks_cooccurrence = get_top_cooccurrence(
             self.users,
@@ -44,7 +50,7 @@ class RecoEngine(object):
             common_track_ids = {
                 key: val
                 for (key, val) in self.group.get_field_count(field).iteritems()
-                if val == i
+                if val == i and self.db[field].loc[key].score >= min_score
             }.keys()
             short_list = [(
                 track,
