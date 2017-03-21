@@ -122,6 +122,8 @@ The ranking will be :
 
 #### Future work
 
+ - Have a `min_score` per field
+ - Change cooccurrences priorities: just after common tracks reco
  - Metrics on ranking
    + Score evolution
    + Users distribution
